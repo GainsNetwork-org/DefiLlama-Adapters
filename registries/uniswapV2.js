@@ -1046,9 +1046,6 @@ const uniV2Configs = {
   'kokomoswap': {
     bsc: '0x971A5f6Ef792bA565cdF61C904982419AA77989f',
   },
-  'kokoswap': {
-    bsc: '0x971A5f6Ef792bA565cdF61C904982419AA77989f',
-  },
   'koone': {
     era: '0x6167ce530e710e29d0F32CFe50062028800e5918',
   },
@@ -2762,6 +2759,9 @@ const uniV2Configs = {
   },
   'venera': {
     bsc: '0x95F9c44fA1585811e1D1a0F59e74174B657B37A5',
+  },
+  'krokoswap-v2': {
+    kasplex: '0x4373b7Fcf5059A785843cD224129e01d243Aef71',
   },
   'versedex': {
     methodology: 'Factory address (0x16bc2B187D7C7255b647830C05a6283f2B9A3AF8) is used to find the LP pairs. TVL is equal to the liquidity on the AMM.',
