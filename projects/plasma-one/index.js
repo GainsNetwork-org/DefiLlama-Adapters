@@ -21,7 +21,9 @@ async function tvl(api) {
   });
   
   const checkingContracts = logs.flatMap(log => [
+    // topics[1]: Checking account
     getAddress(log.topics[1]),
+    // topics[2]: Deposit address that moves funds to checking account
     getAddress(log.topics[2]),
   ]);
   
