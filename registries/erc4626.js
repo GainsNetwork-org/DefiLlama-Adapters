@@ -271,6 +271,10 @@ const configs = {
   'visionboard-vault': {
     hyperliquid: ['0x0a5e236425aca07fd087904F8863CAd554675E06'],
     methodology: 'TVL is calculated from VisionBoard Vault totalAssets() on HyperEVM. Deposits mint VBV vault shares backed by the vault asset, currently USDC.'
+  },
+  'defimarketplus': {
+    arbitrum: ['0x07fF8bCe905CB285220e4D96d8443cfCF141af8b'],
+    methodology: 'TVL = SafeUsdVault.totalAssets() (idle USDC + USDC deployed to whitelisted lending strategies, minus unvested locked-profit).'
   }
 }
 
