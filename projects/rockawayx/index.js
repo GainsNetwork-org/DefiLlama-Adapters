@@ -13,6 +13,12 @@ const LISTA_VAULTS = {
   ],
 };
 
+const UPSHIFT_VAULTS = {
+  ethereum: [
+    '0xc87DBBB8C67e4F19fCD2E297c05937567b2572Ce',
+  ],
+};
+
 const MIDAS_VAULTS = {
   ethereum: [
     '0x030b69280892c888670EDCDCD8B69Fd8026A0BF3', // mMEV
@@ -88,6 +94,25 @@ for (const [chain, vaults] of Object.entries(LISTA_VAULTS)) {
     tvl: async (api) => {
       if (baseTvl) await baseTvl(api);
       await sumERC4626Vaults({ api, calls: vaults, isOG4626: true });
+    }
+  };
+}
+
+async function upshiftTvl(api, vaults) {
+  const assets = await api.multiCall({ abi: 'address:asset', calls: vaults, permitFailure: true });
+  const totalAssets = await api.multiCall({ abi: 'function getTotalAssets() view returns (uint256)', calls: vaults, permitFailure: true });
+  for (let i = 0; i < vaults.length; i++) {
+    if (!assets[i] || totalAssets[i] === null || totalAssets[i] === undefined) continue;
+    api.add(assets[i], totalAssets[i]);
+  }
+}
+
+for (const [chain, vaults] of Object.entries(UPSHIFT_VAULTS)) {
+  const baseTvl = adapterExport[chain]?.tvl;
+  adapterExport[chain] = {
+    tvl: async (api) => {
+      if (baseTvl) await baseTvl(api);
+      await upshiftTvl(api, vaults);
     }
   };
 }
